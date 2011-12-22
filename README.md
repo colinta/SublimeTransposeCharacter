@@ -15,10 +15,10 @@ Installation
 Commands
 --------
 
-`transpose_character`: Swaps two characters, reverses a selection, or swaps two lines.
+`transpose_character`: Swaps two characters, reverses a selection, swaps two lines, or rotates multiple selections.
 
 The behavior of `transpose_character` changes depending on the location of the
-cursor.
+cursor and the selection.
 
 If the cursor is in between two letters (anything other than a newline), it will
 swap them:
@@ -44,4 +44,4 @@ If there is one selection, it will be reversed in place.
 
 If there are multiple selections, the built-in `transpose` command is used, which rotates the selections.
 
-`‹abc›d‹efg›h‹ijk›  =>  ‹ijk›d‹abc›h‹efg› => ‹efg›d‹ijk›h‹abc›  =>  ‹abc›d‹efg›h‹ijk›`
+`‹abc›-‹efg›-‹ijk›  =>  ‹ijk›-‹abc›-‹efg› => ‹efg›-‹ijk›-‹abc›  =>  ‹abc›-‹efg›-‹ijk›`
