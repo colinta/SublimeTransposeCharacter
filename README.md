@@ -15,7 +15,7 @@ Installation
 Commands
 --------
 
-`transpose_character`: Swaps two charaters, reverses a selection, or swaps two lines.
+`transpose_character`: Swaps two characters, reverses a selection, or swaps two lines.
 
 The behavior of `transpose_character` changes depending on the location of the
 cursor.
