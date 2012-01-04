@@ -1,6 +1,9 @@
 TransposeCharacter plugin for Sublime Text 2
 =============================================
 
+Swaps two characters, lines, words, or reverse a word.  Depending on cursor location and selection(s).
+
+
 Installation
 ------------
 
