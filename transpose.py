@@ -3,7 +3,7 @@ from sublime_plugin import TextCommand
 
 
 class TransposeCharacterCommand(TextCommand):
-    def run(self, edit):
+    def run(self, edit, reverse=False):
         if len(self.view.sel()) == 1:
             region = self.view.sel()[0]
             if region.empty():
@@ -14,6 +14,7 @@ class TransposeCharacterCommand(TextCommand):
                 r = region.a
                 a = self.view.substr(l)
                 b = self.view.substr(r)
+
                 if a == "\n":
                     # swap the lines, place the cursor at the end of the current line
                     (row, col) = self.view.rowcol(region.a)
@@ -33,9 +34,12 @@ class TransposeCharacterCommand(TextCommand):
                     dest_region = Region(l.a, r.b + 1)
                     sel_region = Region(r.b)
                 else:
-                    # swap a with b and move the cursor to the right
+                    # swap a with b and move the cursor to the right, or left if reverse
                     dest_region = Region(l, r + 1)
-                    sel_region = Region(r + 1, r + 1)
+                    if reverse:
+                        sel_region = Region(l, l)
+                    else:
+                        sel_region = Region(r + 1, r + 1)
 
                 e = self.view.begin_edit('move_text_horiz')
                 self.view.sel().subtract(region)
@@ -44,13 +48,45 @@ class TransposeCharacterCommand(TextCommand):
                 self.view.end_edit(e)
 
             else:
-                sel_reversed = self.view.substr(region)[::-1]
-
                 e = self.view.begin_edit('move_text_horiz')
                 self.view.sel().subtract(region)
-                self.view.replace(edit, region, sel_reversed)
-                self.view.sel().add(region)
+                self.view.sel().add(Region(region.b, region.a))
                 self.view.end_edit(e)
 
-        else:  # len(self.view.sel()) > 1
-            self.view.run_command('transpose')
+        elif len(self.view.sel()) > 1:
+            e = self.view.begin_edit('move_text_horiz')
+
+            regions = [region for region in self.view.sel()]
+
+            # sort by region.end() DESC
+            def compare(region_a, region_b):
+                return cmp(region_b.end(), region_a.end())
+            regions.sort(compare)
+
+            first = True
+            if reverse:
+                prev_selection = None
+                first_selection = self.view.substr(regions[-1])
+                for region in regions:
+                    selection = self.view.substr(region)
+                    if first:
+                        self.view.replace(edit, region, first_selection)
+                        first = False
+                    else:
+                        self.view.replace(edit, region, prev_selection)
+                    prev_selection = selection
+
+            else:
+                prev_region = None
+                for region in regions:
+                    selection = self.view.substr(region)
+                    if first:
+                        first_selection = selection
+                        first = False
+                    else:
+                        self.view.replace(edit, prev_region, selection)
+                    prev_region = region
+
+                self.view.replace(edit, region, first_selection)
+
+            self.view.end_edit(e)
