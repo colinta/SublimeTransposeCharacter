@@ -7,6 +7,10 @@ Swaps two characters, lines, words, or reverse a word.  Depending on cursor loca
 Installation
 ------------
 
+1. Using Package Control, install "TransposeCharacter"
+
+Or:
+
 1. Open the Sublime Text 2 Packages folder
 
     - OS X: ~/Library/Application Support/Sublime Text 2/Packages/
