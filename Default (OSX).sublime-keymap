@@ -1,4 +1,0 @@
-[
-    { "keys": ["ctrl+t"], "command": "transpose_character" },
-    { "keys": ["ctrl+shift+t"], "command": "transpose_character", "args": {"reverse": true} }
-]
