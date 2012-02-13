@@ -49,6 +49,6 @@ If there is one selection, it will be reversed in place.
 
 `‹race car›  =>  ‹rac ecar›`
 
-If there are multiple selections, the built-in `transpose` command is used, which rotates the selections.
+If there are multiple selections, the it swaps every pair of regions:
 
-`‹abc›-‹efg›-‹ijk›  =>  ‹ijk›-‹abc›-‹efg› => ‹efg›-‹ijk›-‹abc›  =>  ‹abc›-‹efg›-‹ijk›`
+`‹abc›-‹ABC›-‹123›-‹456›  =>  ‹ABC›-‹abc›-‹456›-‹123› => ‹abc›-‹ABC›-‹123›-‹456›`
