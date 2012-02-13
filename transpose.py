@@ -59,34 +59,19 @@ class TransposeCharacterCommand(TextCommand):
             regions = [region for region in self.view.sel()]
 
             # sort by region.end() DESC
-            def compare(region_a, region_b):
-                return cmp(region_b.end(), region_a.end())
-            regions.sort(compare)
+            # def compare(region_a, region_b):
+            #     return cmp(region_b.end(), region_a.end())
+            # regions.sort(compare)
 
-            first = True
-            if reverse:
-                prev_selection = None
-                first_selection = self.view.substr(regions[-1])
-                for region in regions:
-                    selection = self.view.substr(region)
-                    if first:
-                        self.view.replace(edit, region, first_selection)
-                        first = False
-                    else:
-                        self.view.replace(edit, region, prev_selection)
-                    prev_selection = selection
-
-            else:
-                prev_region = None
-                for region in regions:
-                    selection = self.view.substr(region)
-                    if first:
-                        first_selection = selection
-                        first = False
-                    else:
-                        self.view.replace(edit, prev_region, selection)
-                    prev_region = region
-
-                self.view.replace(edit, region, first_selection)
+            prev = None
+            for region in regions:
+                selection = self.view.substr(region)
+                if prev:
+                    prev_region, prev_selection = prev
+                    self.view.replace(edit, region, prev_selection)
+                    self.view.replace(edit, prev_region, selection)
+                    prev = None
+                else:
+                    prev = (region, selection)
 
             self.view.end_edit(e)
