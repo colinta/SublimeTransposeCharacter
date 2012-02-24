@@ -75,7 +75,6 @@ class TransposeCharacterCommand(TextCommand):
             else:
                 prev_region = None
                 for region in regions:
-                    print region, bool(region), prev_region, bool(prev_region)
                     if prev_region is not None:
                         self.transpose_regions(edit, region, prev_region)
                         prev_region = None
