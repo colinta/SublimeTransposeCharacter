@@ -1,7 +1,7 @@
 TransposeCharacter plugin for Sublime Text 2
 =============================================
 
-Swaps two characters, lines, words, or reverse a word.  Depending on cursor location and selection(s).
+Swaps two characters, lines, words, reverses a selection, or swaps two selections, depending on cursor location and selection(s).
 
 
 Installation
@@ -18,6 +18,7 @@ Or:
     - Linux: ~/.Sublime Text 2/Packages/
 
 2. clone this repo
+3. Install keymaps for the commands (see Example.sublime-keymap for my preferred keys)
 
 Commands
 --------
@@ -43,12 +44,10 @@ At the beginning or end of a line, the behavior is to swap the lines:
     2. klmno  => 2.|abcde => 2. fghij
     3.|abcde     3. klmno    3. klmno
 
-If there is one selection, it will be reversed in place.
+If there is one selection, the selection *cursor* will be reversed in place.
+This means you can move the cursor to the beginning or end of the selection,
+which is very useful for extending line selections.
 
-(I'm using `‹›` to indicate "selected text")
-
-`‹race car›  =>  ‹rac ecar›`
-
-If there are multiple selections, the it swaps every pair of regions:
+If there are multiple selections, the it swaps each pair of regions.
 
 `‹abc›-‹ABC›-‹123›-‹456›  =>  ‹ABC›-‹abc›-‹456›-‹123› => ‹abc›-‹ABC›-‹123›-‹456›`
