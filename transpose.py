@@ -14,29 +14,19 @@ class TransposeCharacterCommand(TextCommand):
 
         if a == "\n":
             # swap the lines, place the cursor at the end of the current line
-            (row, col) = self.view.rowcol(region.a)
-            l = self.view.line(region.a - 1)
-            r = self.view.line(region.a)
-            a = self.view.substr(l) + "\n"
-            b = self.view.substr(r) + "\n"
-            dest_region = Region(l.a, r.b + 1)
-            sel_region = Region(l.a)
+            self.view.run_command('swap_line_up')
+            return
         elif b == "\n":
             # swap the lines, place the cursor at the end of the current line
-            (row, col) = self.view.rowcol(region.a)
-            l = self.view.line(region.a)
-            r = self.view.line(region.a + 1)
-            a = self.view.substr(l) + "\n"
-            b = self.view.substr(r) + "\n"
-            dest_region = Region(l.a, r.b + 1)
-            sel_region = Region(r.b)
+            self.view.run_command('swap_line_down')
+            return
+
+        # swap a with b and move the cursor to the right, or left if reverse
+        dest_region = Region(l, r + 1)
+        if reverse:
+            sel_region = Region(l, l)
         else:
-            # swap a with b and move the cursor to the right, or left if reverse
-            dest_region = Region(l, r + 1)
-            if reverse:
-                sel_region = Region(l, l)
-            else:
-                sel_region = Region(r + 1, r + 1)
+            sel_region = Region(r + 1, r + 1)
 
         e = self.view.begin_edit('move_text_horiz')
         self.view.sel().subtract(region)
