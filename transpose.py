@@ -28,17 +28,13 @@ class TransposeCharacterCommand(TextCommand):
         else:
             sel_region = Region(r + 1, r + 1)
 
-        e = self.view.begin_edit('move_text_horiz')
         self.view.sel().subtract(region)
         self.view.replace(edit, dest_region, b + a)
         self.view.sel().add(sel_region)
-        self.view.end_edit(e)
 
     def transpose_selection(self, edit, region):
-        e = self.view.begin_edit('move_text_horiz')
         self.view.sel().subtract(region)
         self.view.sel().add(Region(region.b, region.a))
-        self.view.end_edit(e)
 
     def transpose_regions(self, edit, region_a, region_b):
         selection_a = self.view.substr(region_a)
@@ -55,8 +51,6 @@ class TransposeCharacterCommand(TextCommand):
                 self.transpose_selection(edit, region)
 
         elif len(self.view.sel()) > 1:
-            e = self.view.begin_edit('move_text_horiz')
-
             regions = [region for region in self.view.sel()]
 
             if all(region.empty() for region in regions):
@@ -70,5 +64,3 @@ class TransposeCharacterCommand(TextCommand):
                         prev_region = None
                     else:
                         prev_region = region
-
-            self.view.end_edit(e)
