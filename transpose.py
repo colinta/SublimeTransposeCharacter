@@ -51,7 +51,7 @@ class TransposeCharacterCommand(TextCommand):
                 self.transpose_selection(edit, region)
 
         elif len(self.view.sel()) > 1:
-            regions = [region for region in self.view.sel()]
+            regions = list(self.view.sel())
 
             if all(region.empty() for region in regions):
                 for region in regions:
