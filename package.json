@@ -2,6 +2,6 @@
   "repo": "SublimeTransposeCharacter",
   "name": "TransposeCharacter",
   "description": "Swaps two characters, lines, words, or reverses a selection.  Depending on cursor location and selection(s).",
-  "author": "Colin Thomas-Arnold (colinta)",
+  "author": "Colin T.A. Gray (colinta)",
   "homepage": "https://github.com/colinta/SublimeTransposeCharacter"
 }
