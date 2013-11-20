@@ -3,7 +3,6 @@ TransposeCharacter
 
 Swaps two characters, lines, words, reverses a selection, or swaps two selections, depending on cursor location and selection(s).
 
-
 Installation
 ------------
 
@@ -12,10 +11,9 @@ Installation
 Or:
 
 1. Open the Sublime Text Packages folder
-
     - OS X: ~/Library/Application Support/Sublime Text 3/Packages/
     - Windows: %APPDATA%/Sublime Text 3/Packages/
-    - Linux: ~/.Sublime Text 3/Packages/
+    - Linux: ~/.Sublime Text 3/Packages/ or ~/.config/sublime-text-3/Packages
 
 2. clone this repo
 3. Install keymaps for the commands (see Example.sublime-keymap for my preferred keys)
@@ -32,11 +30,9 @@ Commands
 
 `transpose_character`: Swaps two characters, reverses a selection, swaps two lines, or rotates multiple selections.
 
-The behavior of `transpose_character` changes depending on the location of the
-cursor and the selection.
+The behavior of `transpose_character` changes depending on the location of the cursor and the selection.
 
-If the cursor is in between two letters (anything other than a newline), it will
-swap them:
+If the cursor (`|`) is in between two letters (anything other than a newline), it will swap them:
 
 `te|h  =>  the|`
 
@@ -57,4 +53,4 @@ which is very useful for extending line selections.
 
 If there are multiple selections, the it swaps each pair of regions.
 
-`‹abc›-‹ABC›-‹123›-‹456›  =>  ‹ABC›-‹abc›-‹456›-‹123› => ‹abc›-‹ABC›-‹123›-‹456›`
+`‹abc›-DEF-‹123›-‹456›  =>  DEF-‹abc›-‹456›-‹123› => ‹abc›-DEF-‹123›-‹456›`
