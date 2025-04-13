@@ -1,15 +1,15 @@
 {
   "name": "TransposeCharacter",
+  "details": "https://github.com/colinta/SublimeTransposeCharacter",
   "description": "Swaps two characters, lines, words, or reverses a selection.  Depending on cursor location and selection(s).",
   "author": "Colin T.A. Gray (colinta)",
-  "details": "https://github.com/colinta/SublimeTransposeCharacter",
   "labels": [
     "text manipulation"
   ],
   "releases": [
     {
-      "tags": true,
-      "sublime_text": ">=3000"
+      "sublime_text": ">=3000",
+      "tags": true
     }
   ]
 }
